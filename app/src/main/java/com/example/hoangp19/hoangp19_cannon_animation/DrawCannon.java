@@ -13,6 +13,23 @@ import java.util.ArrayList;
 
 /**
  * Created by Paul on 4/2/17
+ *
+ * In this class, two moving targets are displayed, and the user can aim where they want the ball
+ * to go by pressing anywhere on the screen. When the ball hits a target, the ball will bounce back
+ * to show that it has hit the target. The app will also keep score as to how many times the player
+ * hits the target. During the game, the player can shoot as many balls as they want at the same time.
+
+ [8 points] Modify the targets so that they move around on the screen until they are hit by
+ a cannonball.
+
+ [10 points] Allow the user to have an arbitrary number of cannonballs in the air at once.
+
+ [10 points] Instead of stopping when it hits the ground, the cannonball rolls along and/or
+ bounces in a believable manner.
+
+ [5 points] Have the targets create an animated explosion (or similar effect) when the
+ cannonball hits them.
+
  */
 public class DrawCannon extends android.animation.Animator implements Animator {
     //instance variables
@@ -33,6 +50,7 @@ public class DrawCannon extends android.animation.Animator implements Animator {
     private Paint white;
     private Paint blue;
     private Paint brown;
+    private Paint orange;
     private Path path; //path for cannon barrel
 
     public DrawCannon(CannonMainActivity activity) {
@@ -63,6 +81,9 @@ public class DrawCannon extends android.animation.Animator implements Animator {
         brown = new Paint();
         brown.setColor(0xff8B4513);
         brown.setStyle(Paint.Style.FILL);
+        orange = new Paint();
+        orange.setColor(0xffffaa00);
+        orange.setStyle(Paint.Style.FILL);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -124,10 +145,19 @@ public class DrawCannon extends android.animation.Animator implements Animator {
                 //if the cannonball hits target 1, score will be added by 1
             } else if (target1XPos - 35 < ballXPos && ballXPos < target1XPos + 15 &&
                     target1YPos - 120 < ballYPos && ballYPos < target1YPos + 80) {
+                ball.hitTarget();
+                canvas.drawPaint(orange); //overlay the screen with orange
+                canvas.drawCircle(target1XPos, target1YPos, 1000, red);
+                //wherever the target is, there
+                //will be a big red circle to mimic an explosion when the target is hit
                 numHits++;
                 //if the cannonball hits target 2, score will be added by 1
             } else if (target2XPos - 35 < ballXPos && ballXPos < target2XPos + 15 &&
                     target2YPos - 120 < ballYPos && ballYPos < target2YPos + 80) {
+                ball.hitTarget();
+                canvas.drawPaint(orange); //the entire screen will flash orange
+                canvas.drawCircle(target2XPos, target2YPos, 1000, red); //wherever the target is, there
+                //will be a big red circle to mimic an explosion when the target is hit
                 numHits++;
             }
             canvas.drawCircle(ballXPos + 20, ySize - ballYPos - 20, 20, black);
@@ -170,9 +200,7 @@ public class DrawCannon extends android.animation.Animator implements Animator {
     }
 
     @Override
-    public void setStartDelay(long l) {
-
-    }
+    public void setStartDelay(long l) { }
 
     @Override
     public android.animation.Animator setDuration(long l) {
@@ -185,14 +213,14 @@ public class DrawCannon extends android.animation.Animator implements Animator {
     }
 
     @Override
-    public void setInterpolator(TimeInterpolator timeInterpolator) {
-
-    }
+    public void setInterpolator(TimeInterpolator timeInterpolator) { }
 
     @Override
     public boolean isRunning() {
         return false;
     }
+
+
 }
 
 

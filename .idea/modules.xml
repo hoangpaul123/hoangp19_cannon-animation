@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hoangp19_Cannon-Animation_original.iml" filepath="$PROJECT_DIR$/hoangp19_Cannon-Animation_original.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hw3-cannon-animation-hoangpaul123.iml" filepath="$PROJECT_DIR$/hw3-cannon-animation-hoangpaul123.iml" />
     </modules>
   </component>
 </project>
